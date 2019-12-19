@@ -7,13 +7,13 @@ This is a list of hints about how to debug TvOS project more efficient!
 ```swift 
 po yourView.perform(Selector("_whyIsThisViewNotFocusable")) // swift 5.0
 po self.view!.performSelector(Selector("_whyIsThisViewNotFocusable")) // swift 3.x
-po [(UIView *)0x148db5234 _whyIsThisViewNotFocusable] // 0x148db5234 is the address of your object
+po [(UIView *)0x148db5234 _whyIsThisViewNotFocusable] // 0x148db5234 is the address of your object.
 ```
 
 #### UIFocusDebugger
 [Class](https://developer.apple.com/documentation/uikit/uifocusdebugger) for debugging focus in LLDB.
 ```swift
-po UIFocusDebugger.status()
+po UIFocusDebugger.status() // Check other methods of this class.
 ```
 
 ### UIFocusUpdateContext
