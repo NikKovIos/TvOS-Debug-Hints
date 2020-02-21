@@ -40,6 +40,23 @@ if #available(tvOS 11.0, *) {
 }
 ``` 
 
-### Docs
+### 5) Understanding focus updates
+Another way that focus can change is when user interaction happens (a swipe in a specific direction for example). When this happens, the focus engine builds a list of possible focusable items in the direction of control. It checks the canBecomeFocused property of these items to filter the list and then finally picks the one that is nearest to the original focused item. Once an item is chosen, the focus engine then tries to determine if the focus change is allowed. This is done by calling shouldUpdateFocus(in:) to see if any of the affected items returns false. The order of these calls is interesting. First, the item that is losing focus has its shouldUpdateFocus(in:) called. Next the system traverses up the hierarchy, calling shouldUpdateFocus(in:) on each parent until it reaches the root. Finally it calls shouldUpdateFocus(in:) on the item that is receiving focus. The system will then traverse up the hierarchy for the receiving focus item, but will only call shouldUpdateFocus(in:) on the hierarchy items that it didn’t call while traversing for the item losing focus.
+
+To visualize the order of these calls, given the following view and the user has swiped in the down direction:
+![](https://www.bignerdranch.com/assets/img/blog/2017/03/shouldupdatefocusinsameview.png "")  
+The order of shouldUpdateFocus(in:) will be:
+
+Top Left -> LeftSubView -> ViewController -> Bottom Left
+
+But if the user swipes in the right direction:  
+![](https://www.bignerdranch.com/assets/img/blog/2017/03/shouldupdatefocusindifferentview.png "")  
+The order will be:
+
+Top Left -> LeftSubView -> ViewController -> Top Right -> RightSubView
+
+
+### Docs and sources
 * https://developer.apple.com/library/archive/documentation/General/Conceptual/AppleTV_PG/WorkingwiththeAppleTVRemote.html
 * https://developer.apple.com/documentation/uikit/focus-based_navigation/debugging_focus_issues_in_your_app
+* https://www.bignerdranch.com/blog/10-tips-for-mastering-the-focus-engine-on-tvos/
