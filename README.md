@@ -6,8 +6,10 @@ This is a list of hints about how to debug TvOS project more efficient!
 #### 1a)UIFocusDebugger
 [Class](https://developer.apple.com/documentation/uikit/uifocusdebugger) for debugging focus in LLDB.
 ```swift
-po UIFocusDebugger.checkFocusability(for: yourView)
+po UIFocusDebugger.checkFocusability(for: yourView)  // Diagnoses potential issues.
 po UIFocusDebugger.status() // Check other methods of this class.
+po UIFocusDebugger.simulateFocusUpdateRequest(from: environment) // i.e. a successful call to environment.setNeedsFocusUpdate().
+po UIFocusDebugger.help() // Prints detailed instructions for all debugging commands.
 ```
 #### 1b) _whyIsThisViewNotFocusable [Deprecated]
 ```swift 
@@ -60,3 +62,4 @@ Top Left -> LeftSubView -> ViewController -> Top Right -> RightSubView
 * https://developer.apple.com/library/archive/documentation/General/Conceptual/AppleTV_PG/WorkingwiththeAppleTVRemote.html
 * https://developer.apple.com/documentation/uikit/focus-based_navigation/debugging_focus_issues_in_your_app
 * https://www.bignerdranch.com/blog/10-tips-for-mastering-the-focus-engine-on-tvos/
+* https://devstreaming-cdn.apple.com/videos/wwdc/2017/224sn8vw625k1e86/224/224_focus_interaction_in_tvos_11.pdf?dl=1
